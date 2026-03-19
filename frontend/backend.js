@@ -41,7 +41,7 @@ async function addExpense() {
     const item = document.getElementById("item").value
     const expense_amounts = document.getElementById("expense_amount").value
 
-    await fetch("http://127.0.0.1:8000/expenses/", {
+    await fetch("https://tracker-dqo6.onrender.com/expenses/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -58,7 +58,7 @@ async function addExpense() {
 
 async function showExpenses() {
 
-    const response = await fetch("http://127.0.0.1:8000/expenses/")
+    const response = await fetch("https://tracker-dqo6.onrender.com/expenses/")
     const data = await response.json()
 
     const list = document.getElementById("expenseList")
