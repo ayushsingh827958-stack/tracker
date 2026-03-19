@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from  router.sales import router as sales_router
+from router.expense import router as expense_router
 app = FastAPI()
 app.include_router(sales_router)
+app.include_router(expense_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # or your frontend URL
