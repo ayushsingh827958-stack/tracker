@@ -22,7 +22,7 @@ function addSale() {
 
 function showSales() {
 
-    const respose = fetch("http://127.0.0.1:8000/sales/")
+    const respose = fetch("https://tracker-dqo6.onrender.com/sales/")
         .then(res => res.json())
         .then(data => {
             const list = document.getElementById("result")
