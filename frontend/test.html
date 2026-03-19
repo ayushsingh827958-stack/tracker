@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p.date {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .report div {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sales Report</h1>
+        <p class="date" id="report-date">Date: --</p>
+
+        <div class="report" id="report">
+            <div><span>Total Sales:</span> <span id="total-sales">Loading...</span></div>
+            <div><span>Total Expenses:</span> <span id="total-expenses">Loading...</span></div>
+            <div><span>Profits:</span> <span id="profits">Loading...</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Set today's date on frontend
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('report-date').innerText = "Date: " + today.toLocaleDateString(undefined, options);
+
+        // Fetch report from API
+        fetch('http://127.0.0.1:8000/report')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('total-sales').innerText = data["Total Sales"];
+                document.getElementById('total-expenses').innerText = data["Total Expenses"];
+                document.getElementById('profits').innerText = data["Profits"];
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('total-sales').innerText = 'Error';
+                document.getElementById('total-expenses').innerText = 'Error';
+                document.getElementById('profits').innerText = 'Error';
+            });
+    </script>
+</body>
+
+</html>
