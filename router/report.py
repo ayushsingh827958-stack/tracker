@@ -34,7 +34,7 @@ def show_financial_report():
     print("total expense::",total_expenses)    
     print("Net profit::",profit)
        '''
-'''from fastapi import APIRouter
+from fastapi import APIRouter
 from router.expense import Expenses
 from router.sales import Sales
 
@@ -54,32 +54,5 @@ def report():
         "Total Expenses": total_expenses,
         "Profits": profit
     }
-'''
+
 # report.py
-from fastapi import APIRouter
-from router.patient import Database  # Your database module
-
-router = APIRouter(
-    prefix="/reports",
-    tags=["Report"]
-)
-
-db = Database()
-
-@router.get("/reports")
-def report():
-    # Sum all sales amounts
-    total_sales_row = db.fetch_one("SELECT SUM(amount) FROM sales")
-    total_sales = total_sales_row[0] if total_sales_row[0] is not None else 0
-
-    # Sum all expense amounts (assuming you have an expenses table)
-    total_expenses_row = db.fetch_one("SELECT SUM(amount) FROM expenses")
-    total_expenses = total_expenses_row[0] if total_expenses_row[0] is not None else 0
-
-    profit = total_sales - total_expenses
-
-    return {
-        "Total Sales": total_sales,
-        "Total Expenses": total_expenses,
-        "Profits": profit
-    }

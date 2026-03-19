@@ -52,7 +52,10 @@ async function addExpense() {
         })
     })
 
-    showExpenses()
+        .then(res => res.json())
+        .then(data => {
+            alert("saved expense")
+        })
 }
 
 
@@ -81,7 +84,7 @@ document.getElementById('report-date').innerText = "Date: " + today.toLocaleDate
 // Fetch report from API
 // 
 function generateReport() {
-    fetch('http://127.0.0.1:8000/reports/reports')
+    fetch('https://tracker-dqo6.onrender.com/reports/')
         .then(res => res.json())
         .then(data => {
             document.getElementById('total-sales').innerText = data["Total Sales"];
