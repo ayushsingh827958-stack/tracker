@@ -43,7 +43,7 @@ router = APIRouter(
     tags=["Report"]
 )
 
-@router.get("/reports")
+@router.get("/")
 def report():
     total_sales = sum(s.get("amount", 0) for s in Sales)
     total_expenses = sum(e.get("amount", 0) for e in Expenses)
